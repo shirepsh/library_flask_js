@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}all books{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-center"><h2>book deleted  </h2></div> <br>
+<div class="d-flex justify-content-center"><h4>the book {{book.book_name}} was deleted from our library  </h4></div>
+{% endblock %}

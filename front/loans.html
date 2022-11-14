@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: white;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #38444d;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a,
+        .dropbtn {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover,
+        .dropdown:hover .dropbtn {
+            background-color: red;
+        }
+
+        li.dropdown {
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .active {
+            background-color: #04AA6D;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <ul>
+        <li><a href="index.html">home</a></li>
+        <li><a href="books.html">books</a></li>
+        <li><a href="customers.html">customers</a></li>
+        <li><a href="loans.html">loans</a></li>
+        <li style="float:right"><a class="active" a href="my_cart.html">my cart</a></li>
+
+    </ul>
+
+    <h5> add loan</h5>
+    customer id: <input id="user_customer_id"> <br>
+    book id: <input id="user_book_id"> <br>
+    <button class="btn btn-success" onclick="add_loan()">add loan</button>
+
+    <h1>loans</h1>
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="loans"></div>
+
+
+    <script>
+        const MYSERVER = 'http://127.0.0.1:5000/'
+
+        //diaplay all loans
+        const displayLoans = async () => {
+            res = await fetch(`${MYSERVER}loans/`)
+                .then((response) => response.json())
+            loans.innerHTML = res.map((x, ind) => `
+            <div class="col">
+            <div class="card h-100"> 
+            <div class="card-body">
+                <h5 class="card-title">customer id: ${x.customer_id}, loan id: ${x.loan_id} book id:${x.book_id}</h5> <hr>
+                <p class="card-text">loan date: ${x.loan_date} <br> return date: ${x.return_date} </p>
+                <button class="btn btn-danger" onclick="del_loan(${x.loan_id})">del loan</button>
+            </div>
+            </div>
+            </div>`).join('')
+        }
+        displayLoans()
+
+        //add loan
+        const add_loan = async () => {
+            res1 = await fetch(`${MYSERVER}add_loan/`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    customer_id: user_customer_id.value,
+                    book_id: user_book_id.value,
+                }),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+        }
+
+        //delete loan
+        const del_loan = async (loan_id) => {
+            res2 = await fetch(`${MYSERVER}/delete_loan/${loan_id}`, {
+                method: 'DELETE',
+            });
+        }
+    </script>
+
+
+
+</body>
+
+</html>

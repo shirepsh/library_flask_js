@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}customer{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-center"><h2>you looking for: </h2></div>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ customer.customer_name }} <style></style></h5>
+            <img src="/static/customers/{{customer.customer_image}}" class="card-img-top">
+                <p class="card-text"> id: {{customer.customer_id}}</p>
+                <p class="card-text">city: {{customer.city}} </p>
+                <p class="card-text">age:{{customer.age }} </p>
+                <a class="btn btn-danger" href="/delete_customer/{{customer.customer_id}}">delete this customer</a> <br><br>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

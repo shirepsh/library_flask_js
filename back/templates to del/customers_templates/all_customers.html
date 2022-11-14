@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block title %}all customers{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+
+<div class="d-flex justify-content-center"><h2>customers</h2></div>
+
+<div class="d-flex justify-content-center">
+    {% if active_loan == True %}
+    <h5 style="color: red;"> the customer has an active loan <br> you cant delete the customer before he will return the book</h5>
+    {% endif %} <br>
+    </div>
+</div>
+
+<a class="btn btn-success" href="/add_customer/">Add a customer</a> <br><br>
+
+<form class="form-inline" action="/search_customer" method="post">
+    <div class="input-group">
+    <input type="text" class="from-control" name="name" placeholder="Search for a customer here."> 
+        &nbsp; 
+    <button class="btn btn-outline-success" type="submit">search book</button>
+    </div>
+</form> <br>
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    {% for customer in customers %}
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{customer.customer_name}} <style></style>
+                </h5>
+                <img src="/static/customers/{{customer.customer_image}}" class="card-img-top">
+                <p class="card-text"> id: {{customer.customer_id}}</p>
+                <p class="card-text">city: {{customer.city}} </p>
+                <p class="card-text">age:{{customer.age }} </p>
+                <a class="btn btn-danger" href="/delete_customer/{{customer.customer_id}}">delete this customer</a>
+                <br><br>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% endfor %}
+</div>
+{% endblock %}

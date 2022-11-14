@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Home Page{% endblock %}
+{% block head %}
+{{ super() }}
+
+{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-center"><h2>late loans</h2></div>
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    {% for loan in late_loans %}
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">late by {{late_time[late_loans.index(loan)]}} days</h5>
+                <p class="card-text">loan id: {{loan.loan_id}}</p>
+                <p class="card-text">customer id: {{loan.customer_id}}</p>
+                <p class="card-text">book id: {{loan.book_id}} </p>
+                <p class="card-text">loan date: {{loan.loan_date}} </p>
+                <p class="card-text">return date: {{loan.return_date}} </p>
+                <p class="card-text">returned? {{loan.returned}} </p>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endfor %}
+</div>
+{% endblock %}

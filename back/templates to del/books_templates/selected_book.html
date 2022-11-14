@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}book{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-center"><h2>you looking for: </h2></div>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{book.book_name}} <style></style>
+                </h5>
+                <img src="/static/books/{{book.book_image}}" class="card-img-top">
+                <p class="card-text">book id: {{book.book_id}}</p>
+                <p class="card-text">author: {{book.author}} </p>
+                <p class="card-text">year published: {{book.year_published}} </p>
+                <p class="card-text">book type: {{book.book_type}} </p>
+                <a class="btn btn-danger" href="/delete_book/{{book.book_id}}">delete this book</a> <br><br>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    
+{% endblock %}
+
+

@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block title %}add book{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-center"><h2>add book</h2></div>
+    <form action="{{ url_for('books.add_book') }}" method="POST" >
+        <label for="book_name">book name: </label>
+        <input type="string" name="book_name" id="book_name" placeholder="book_name" required> <br><br>
+        <label for="author">author: </label>
+        <input type="string" name="author" id="author" placeholder="author" required> <br><br>
+        <label for="year_published">year published: </label>
+        <input type="string" name="year_published" id="year_published" placeholder="year_published" min="0" required> <br><br>
+        <label for="book_type">book type: </label>
+        <select name="book_type" id="book_type">book_type     
+            <option value="1 - loan time up to 10 days">1 - loan time up to 10 days</option> 
+            <option value="2 - loan time up to 5 days">2 - loan time up to 5 days</option>
+            <option value="3 - loan time up to 2 days">3 - loan time up to 2 days</option> </select> <br><br> 
+        <h6>Enter the book name here  <br> make sure to write in lowercase letters and separates the words with _ <br> (optional)  </h6> 
+        <label for="book_image">image</label> 
+        <input type="string" name="book_image" id="book_image" > <br> <br>
+
+        <button type="submit" onclick="save()">save</button>
+        </form>
+        <script>
+            function save(){
+                alert ("Yay, a new book was added to our library now")
+            }
+        </script>
+
+
+{% endblock %}

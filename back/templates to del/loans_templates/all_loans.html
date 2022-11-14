@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block title %}all loans{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-center">
+    <h2>loans</h2>
+</div>
+
+<div class="d-flex justify-content-center">
+    {% if delme == True %}
+    <h5 style="color: red;"> you cant delete this loan <br> the book have to be returned first in order to delete</h5>
+    {% endif %} 
+</div>
+    
+<a class="btn btn-success" href="/add_loan/">add a loan</a> <br>
+<a class="btn btn-danger" href="/late_loans/">display late loans</a> <br><br>
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    {% for loan in loans %}
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">loan id: {{loan.loan_id}}</h5>
+                <p class="card-text">customer id: {{loan.customer_id}}</p>
+                <p class="card-text">customer name: {% if loan.customer_id == None %} this customer was removed {% else %} {{loan.customers.customer_name}} {% endif %}</p>
+                <p class="card-text">book id: {{loan.book_id}} </p>
+                <p class="card-text">book name: {% if loan.book_id == None %} this book was removed {% else %} {{loan.books.book_name}} {% endif %}</p> 
+                <p class="card-text">loan date: {{loan.loan_date}} </p>
+                <p class="card-text">return date: {{loan.return_date}} </p>
+                <p class="card-text">returned? {{loan.returned}} </p>
+                <a class="btn btn-success" href="/return_book/{{loan.loan_id}}">return this book</a> <br>
+                <a class="btn btn-danger" href="/delete_loan/{{loan.loan_id}}">delete this loan</a> <br><br>
+            </div>
+        </div>
+    </div>
+
+
+    {% endfor %}
+</div>
+{% endblock %}

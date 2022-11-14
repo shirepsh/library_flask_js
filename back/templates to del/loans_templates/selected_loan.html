@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}all loans{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-center"><h2>you looking for: </h2></div>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">loan id: {{loan.loan_id}}</h5>
+                <p class="card-text">customer id: {{loan.customer_id}}</p>
+                <p class="card-text">book id: {{loan.book_id}} </p>
+                <p class="card-text">loan date: {{loan.loan_date}} </p>
+                <p class="card-text">maximum return date: {{loan.maximum_return_date}} </p>
+                <p class="card-text">returned? {{loan.returned}} </p>
+            </div>
+        </div>
+    </div>
+
+<a class="btn btn-danger" href="/delete_loan/{{loan.loan_id}}">delete this loan</a> <br><br>
+{% endblock %}

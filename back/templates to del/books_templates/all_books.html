@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block title %}all books{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-center">
+    <h2>books</h2>
+</div>
+<a class="btn btn-success" href="/add_book/">Add a book</a> <br><br>
+
+<form class="form-inline" action="/search_book" method="post">
+    <div class="input-group">
+        <input class="from-control" type="search" name="name" placeholder="Search for a book here."> &nbsp;
+        <button class="btn btn-outline-success" type="submit">search book</button>
+    </div>
+</form> <br>
+
+<div class="d-flex justify-content-center">
+    {% if active_loan == True %}
+    <h5 style="color: red;">this book is on loan <br> you cant delete this book right now!</h5>
+    {% endif %} <br>
+</div>
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    {% for book in books %}
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{book.book_name}} <style></style>
+                </h5>
+                <img src="/static/books/{{book.book_image}}" class="card-img-top">
+                <p class="card-text">book id: {{book.book_id}}</p>
+                <p class="card-text">author: {{book.author}} </p>
+                <p class="card-text">year published: {{book.year_published}} </p>
+                <p class="card-text">book type: {{book.book_type}} </p>
+                <a class="btn btn-danger" href="/delete_book/{{book.book_id}}">delete this book</a> <br><br>
+            </div>
+        </div>
+    </div>
+
+
+    {% endfor %}
+</div>
+{% endblock %}

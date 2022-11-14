@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}add loan{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-center">
+    <h2>add loan</h2>
+</div>
+
+<div class="d-flex justify-content-center">
+    {% if customer == True %}
+    <h5 style="color: red;"> you cant add loan <br> customer is not exsist</h5>
+    {% endif %} 
+
+    {% if book == True %}
+    <h5 style="color: red;">you cant add loan <br> book is not exsist</h5>
+    {% endif %}
+
+    {% if loan == True %}
+    <h5 style="color: red;"> you cant add loan <br> book is already on loan</h5>
+    {% endif %} <br>
+</div>
+
+<form action="{{ url_for('loans.add_loan') }}" method="POST">
+    <label for="customer_id">customer id: </label>
+    <input type="number" name="customer_id" id="customer_id" placeholder="customer_id" min="0"> <br><br>
+    <label for="book_id">book id: </label>
+    <input type="number" name="book_id" id="book_id" placeholder="book_id" min="0"> <br><br>
+    <label for="loan_date">loan date: </label>
+    <input type="date" name="loan_date" id="loan_date" placeholder="loan_date">
+    <button type="submit" onclick="save()">save</button>
+    <script>
+        function save() {
+            alert("loan added, pay attention to your possibale loan time")
+        }
+    </script>
+    {% endblock %}
